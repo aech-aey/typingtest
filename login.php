@@ -1,5 +1,5 @@
 <?php
-$login = 0;
+
 $invalid = 0;
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     include 'connect.php';
@@ -13,10 +13,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if ($result) {
         $num = mysqli_num_rows($result);
         if ($num > 0) {
-            $login = 1;
+            
             session_start();
             $_SESSION['username'] = $username;
-            $_SESSION['name'] = $name;
+          
             header('location:home.php');
         } else {
             $invalid = 1;
@@ -233,14 +233,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   </div>';
     }
     ?>
-    <?php
-    if ($login) {
-        echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
-    <strong>Successful!</strong> You are successfully login.
-    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-  </div>';
-    }
-    ?>
+  
     <div class="con">
         <h1 class="text-center "> <strong>Login</strong> to check your <span class="blue">typing speed.</span></h1>
     </div>

@@ -334,7 +334,7 @@ if ($success && $suc) {
         <div class="container1">
             <form action="sign.php" method="post">
                 <div class="mb-3">
-                    <label for="exampleInputEmail1" class="form-label">Name</label>
+                    <label for="exampleInputEmail1" class="form-label">Name <span class='alertt'>(must be atleast of 3 characters) </span></label>
                     <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Enter your name" name="name">
 
                 </div>
