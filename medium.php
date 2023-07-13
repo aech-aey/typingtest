@@ -1,20 +1,27 @@
 <?php
-// include 'connect.php';
-// $username = $_SESSION['username'];
-// $sql = "SELECT medium FROM scores WHERE username='$username'";
-// $result = $conn->query($sql);
+session_start();
+include 'connect.php';
+$username = $_SESSION['username'];
+$sql = "SELECT medium FROM scores WHERE uname='$username'";
+$result = $conn->query($sql);
 
-// if ($result->num_rows > 0) {
-//     $row = $result->fetch_assoc();
-//     $dbvalue = $row['medium'];
+if ($result->num_rows > 0) {
+    $row = $result->fetch_assoc();
+    $dbvalue = $row['medium'];
+}
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
-//     // Compare the PHP variable with the database value
-//     if ($wpm > $dbvalue) {
-//         // Update the database value
-//         $sql = "UPDATE scores SET medium = $wpm WHERE username='$username'";
-//         $conn->query($sql);
-//     }
-// }
+        $typingspeed = $_POST['typingspeed'];
+        
+     
+
+        if ($typingspeed > $dbvalue) {
+        
+            $sql = "UPDATE scores SET medium = $typingspeed WHERE uname='$username'";
+            $conn->query($sql);
+        }
+    }
+
 ?>
 
 <!doctype html>
@@ -264,21 +271,38 @@
     };
 
     const caltypingspeed = (totaltime) => {
-        let totalwords = textarea.value.trim();
-        let actualwords = totalwords === '' ? [] : totalwords.split(' ');
-        let correctWords = errorcheck(actualwords);
+            let totalwords = textarea.value.trim();
 
-        if (correctWords === sentowrite.length) {
-            result.innerHTML = 'You won!';
-            let typingspeed = Math.round((correctWords / totaltime) * 60);
-        result.innerHTML += ` Your typing speed is ${typingspeed} words per minute.`;
-        } else {
-            result.innerHTML = 'You lost!';
+            let actualwords = totalwords === '' ? 0 : totalwords.split(' ');
+
+            actualwords = errorcheck(actualwords);
+
+            if (actualwords !== 0) {
+                let typingspeed = Math.round((actualwords / totaltime) * 60);
+                result.innerHTML = `Your typing speed is ${typingspeed} words per minute & you wrote ${actualwords} correct words out of ${sentowrite.length}`;
+
+
+                var form = document.createElement('form');
+                form.method = 'POST';
+                form.style.display = 'none';
+
+                var input = document.createElement('input');
+                input.type = 'hidden';
+                input.name = 'typingspeed';
+                input.value = typingspeed;
+
+                form.appendChild(input);
+                document.body.appendChild(form);
+
+                form.submit();
+                result.innerHTML = `Your typing speed is ${typingspeed} words per minute & you wrote ${actualwords} correct words out of ${sentowrite.length}`;
+
+
+
+            } else {
+                result.innerHTML = `Your typing speed is 0 word per minute`;
+            }
         }
-
-        // let typingspeed = Math.round((correctWords / totaltime) * 60);
-        // result.innerHTML += ` Your typing speed is ${typingspeed} words per minute.`;
-    };
 
     const end = () => {
         btn.innerText = 'Start';

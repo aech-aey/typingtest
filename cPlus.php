@@ -1,21 +1,29 @@
 <?php
-// include 'connect.php';
-// $username = $_SESSION['username'];
-// $sql = "SELECT cplus FROM scores WHERE username='$username'";
-// $result = $conn->query($sql);
+session_start();
+include 'connect.php';
+$username = $_SESSION['username'];
+$sql = "SELECT cplus FROM scores WHERE uname='$username'";
+$result = $conn->query($sql);
 
-// if ($result->num_rows > 0) {
-//     $row = $result->fetch_assoc();
-//     $dbvalue = $row['cplus'];
+if ($result->num_rows > 0) {
+    $row = $result->fetch_assoc();
+    $dbvalue = $row['cplus'];
+}
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
-//     // Compare the PHP variable with the database value
-//     if ($wpm > $dbvalue) {
-//         // Update the database value
-//         $sql = "UPDATE scores SET cplus = $wpm WHERE username='$username'";
-//         $conn->query($sql);
-//     }
-// }
+        $typingspeed = $_POST['typingspeed'];
+        
+     
+
+        if ($typingspeed > $dbvalue) {
+        
+            $sql = "UPDATE scores SET cplus = $typingspeed WHERE uname='$username'";
+            $conn->query($sql);
+        }
+    }
+
 ?>
+
 
 <!doctype html>
 <html lang="en">
@@ -250,10 +258,32 @@ cout << "The sum is: " << sum << endl;</pre>`,
             if (actualwords !== 0) {
                 let typingspeed = Math.round((actualwords / totaltime) * 60);
                 result.innerHTML = `Your typing speed is ${typingspeed} words per minute & you wrote ${actualwords} correct words out of ${sentowrite.length}`;
+
+
+                var form = document.createElement('form');
+                form.method = 'POST';
+                form.style.display = 'none';
+
+                var input = document.createElement('input');
+                input.type = 'hidden';
+                input.name = 'typingspeed';
+                input.value = typingspeed;
+
+                form.appendChild(input);
+                document.body.appendChild(form);
+
+                form.submit();
+                result.innerHTML = `Your typing speed is ${typingspeed} words per minute & you wrote ${actualwords} correct words out of ${sentowrite.length}`;
+
+
+
             } else {
                 result.innerHTML = `Your typing speed is 0 word per minute`;
             }
         }
+
+
+
 
         const end = () => {
             btn.innerText = 'Start';

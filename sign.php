@@ -283,50 +283,7 @@ if ($success && $suc) {
 </head>
 
 <body>
-
-     <?php
-//     if ($user) {
-//         $success = 0;
-//         echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
-//     <strong>Try other username!</strong> This username already exist.
-//     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-//   </div>';
-//     }
-//     if (strlen($username) < 3) {
-//         $success = 0;
-//         echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
-//     <strong>Try other username!</strong> Username must be atleast 3 characters long.
-//     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-//   </div>';
-//     }
-
-
-//     if (strlen($password) < 8 || !preg_match('/\d/', $password)) {
-//         $success = 0;
-//         echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
-//     <strong>Check password!</strong> Password must be at least 8 characters long and contain at least 1 number.
-//     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-//   </div>';
-//     }
-
-//     if (strlen($password) < 8 || !preg_match('/\d/', $password) || $password !== $conpassword) {
-//         $success = 0;
-//         echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
-//     <strong>Check password!</strong> Password do not match with confirm password.
-//     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-//   </div>';
-//     }
-//     if ($success) {
-//         echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
-//     <strong>Successful!</strong> You are successfully signup.
-//     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-//   </div>';
-//     }
-//     ?> 
-
-
-
-
+    
     <div class="con">
         <h1 class="text-center "> <strong>Signup</strong> to check your <span class="blue">typing speed.</span></h1>
     </div>

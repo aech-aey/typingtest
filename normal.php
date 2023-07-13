@@ -1,20 +1,27 @@
 <?php
+// session_start();
 // include 'connect.php';
 // $username = $_SESSION['username'];
-// $sql = "SELECT normal FROM scores WHERE username='$username'";
+// $sql = "SELECT normal FROM scores WHERE uname='$username'";
 // $result = $conn->query($sql);
 
 // if ($result->num_rows > 0) {
 //     $row = $result->fetch_assoc();
 //     $dbvalue = $row['normal'];
-
-//     // Compare the PHP variable with the database value
-//     if ($wpm > $dbvalue) {
-//         // Update the database value
-//         $sql = "UPDATE scores SET normal = $wpm WHERE username='$username'";
-//         $conn->query($sql);
-//     }
 // }
+//     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
+//         $typingspeed = $_POST['typingspeed'];
+        
+     
+
+//         if ($typingspeed > $dbvalue) {
+        
+//             $sql = "UPDATE scores SET normal = $typingspeed WHERE uname='$username'";
+//             $conn->query($sql);
+//         }
+//     }
+
 ?>
 <!doctype html>
 <html lang="en">
@@ -249,16 +256,6 @@
             if (actualwords !== 0) {
                 let typingspeed = Math.round((actualwords / totaltime) * 60);
                 result.innerHTML = `Your typing speed is ${typingspeed} words per minute & you wrote ${actualwords} correct words out of ${sentowrite.length}`;
-                console.log(typingspeed);
-                $.ajax({
-                    url: 'script.php',
-                    method: 'POST',
-                    data: typingspeed,
-                    success: function(response) {
-
-                        console.log(response);
-                    }
-                });
             } else {
                 result.innerHTML = `Your typing speed is 0 word per minute`;
             }
